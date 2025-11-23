@@ -1,0 +1,29 @@
+﻿@page
+@model asp_presentacion.Pages.Ventanas.RegistrarModel
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+<div class="container mt-5">
+    <h2>Registrar Usuario</h2>
+    <form method="post">
+        <div class="form-group">
+            <label>Nombre</label>
+            <input asp-for="Nombre" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Correo</label>
+            <input asp-for="Correo" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label>Contraseña</label>
+            <input asp-for="PasswordHash" type="password" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-info" asp-page-handler="Registrar">Registrar</button>
+    </form>
+
+    @if (ViewData.ContainsKey("Mensaje"))
+    {
+        @await Html.PartialAsync("Mensajes", ViewData["Mensaje"])
+    }
+</div>

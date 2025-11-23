@@ -1,0 +1,75 @@
+﻿/* ===== PALETA ===== */
+:root {
+    --naranja: #ff7a00;
+    --naranja-claro: #ffa64d;
+    --gris-1: #0f0f0f;
+    --gris-2: #1a1a1a;
+    --gris-3: #262626;
+    --texto: #eaeaea;
+    --texto-opaco: #bfbfbf;
+}
+
+/* ===== FONDO GLOBAL ===== */
+.gym-body {
+    background: var(--gris-1);
+    color: var(--texto);
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-gym {
+    background: var(--gris-2) !important;
+    border-bottom: 1px solid #333;
+}
+
+    .navbar-gym .navbar-brand {
+        color: var(--naranja) !important;
+        font-size: 1.4rem;
+        letter-spacing: 1px;
+    }
+
+    .navbar-gym .nav-link {
+        color: var(--texto-opaco) !important;
+        transition: 0.2s ease;
+    }
+
+        .navbar-gym .nav-link:hover {
+            color: var(--naranja) !important;
+        }
+
+.dropdown-menu-dark {
+    background: var(--gris-3);
+}
+
+.dropdown-item {
+    color: var(--texto);
+}
+
+    .dropdown-item:hover {
+        background: var(--naranja);
+        color: #000;
+    }
+
+/* ===== CONTENIDO ===== */
+.main-container {
+    padding-top: 30px;
+    padding-bottom: 40px;
+    min-height: 75vh;
+}
+
+/* ===== FOOTER ===== */
+.gym-footer {
+    background: var(--gris-2);
+    padding: 18px 0;
+    color: var(--texto-opaco);
+    border-top: 1px solid #333;
+}
+
+.footer-link {
+    color: var(--naranja);
+    text-decoration: none;
+}
+
+    .footer-link:hover {
+        text-decoration: underline;
+    }
