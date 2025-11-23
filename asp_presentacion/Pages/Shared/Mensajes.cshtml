@@ -1,0 +1,35 @@
+﻿@model string
+
+@{
+    // Tipo de mensaje (success, error, warning, info)
+    var tipo = ViewData["TipoMensaje"]?.ToString() ?? "info";
+
+    var clase = tipo switch
+    {
+        "success" => "alert alert-success d-flex align-items-center",
+        "error" => "alert alert-danger d-flex align-items-center",
+        "warning" => "alert alert-warning d-flex align-items-center",
+        _ => "alert alert-info d-flex align-items-center"
+    };
+
+    var icono = tipo switch
+    {
+        "success" => "✔️",
+        "error" => "❌",
+        "warning" => "⚠️",
+        _ => "ℹ️"
+    };
+
+    var prefijo = tipo switch
+    {
+        "success" => "Éxito:",
+        "error" => "Error:",
+        "warning" => "Advertencia:",
+        _ => "Info:"
+    };
+}
+
+<div class="@clase mt-3" role="alert">
+    <span class="me-2">@icono</span>
+    <strong>@prefijo</strong> @Model
+</div>

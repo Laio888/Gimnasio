@@ -1,0 +1,67 @@
+﻿@page
+@model asp_presentacion.Pages.Ventanas.UsuarioPrincipalModel
+@{
+    ViewData["Title"] = "Portal del Usuario";
+    var nombre = HttpContext.Session.GetString("Nombre") ?? "Usuario";
+}
+
+<!-- Barra superior -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <!-- Logo / Marca -->
+        <a class="navbar-brand" asp-page="Index">🏋️ GimnasioApp</a>
+
+        <!-- Botón responsive -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usuarioNavbar"
+                aria-controls="usuarioNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Opciones -->
+        <div class="collapse navbar-collapse" id="usuarioNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="Ventanas/ReservarClase">📅 Reservar Clases</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="Ventanas/CrearRutina">🏋️ Crear Rutinas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="Ventanas/Notificacion">🔔 Notificaciones</a>
+                </li>
+            </ul>
+
+            <!-- Botón engranaje (ConfigUsuario) -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Ventanas/ConfigUsuario">⚙</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="container mt-5">
+    <h2 class="text-center">Bienvenido, @nombre 👋</h2>
+    <hr />
+
+    <!-- Acciones rápidas -->
+    <div class="row text-center mt-4">
+        <div class="col-md-4 mb-3">
+            <a class="btn btn-primary w-100" asp-page="Ventanas/ReservarClase">📅 Reservar Clase</a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a class="btn btn-success w-100" asp-page="Ventanas/CrearRutina">🏋️ Crear Rutina</a>
+        </div>
+        <div class="col-md-4 mb-3">
+            <a class="btn btn-info w-100" asp-page="Ventanas/Notificacion">🔔 Ver Notificaciones</a>
+        </div>
+    </div>
+
+    <!-- Mensajes emergentes -->
+    @if (ViewData.ContainsKey("Mensaje"))
+    {
+        @await Html.PartialAsync("Mensajes", ViewData["Mensaje"])
+    }
+</div>
