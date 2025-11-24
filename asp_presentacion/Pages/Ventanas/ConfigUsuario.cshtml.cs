@@ -9,10 +9,8 @@ namespace asp_presentacion.Pages.Ventanas
     {
         private readonly IUsuarioPresentacion _usuarioService;
 
-        public ConfigUsuarioModel(IUsuarioPresentacion usuarioService)
-        {
-            _usuarioService = usuarioService;
-        }
+            {
+            }
 
         public Usuario? Usuario { get; set; }
 
@@ -72,7 +70,7 @@ namespace asp_presentacion.Pages.Ventanas
                 }
 
                 usuario.PasswordHash = PasswordNueva;
-            }
+        }
 
             // Actualiza nombre y correo
             usuario.Nombre = Nombre;
@@ -89,7 +87,7 @@ namespace asp_presentacion.Pages.Ventanas
             ViewData["TipoMensaje"] = "success";
 
             return RedirectToPage("/Ventanas/ConfigUsuario");
-        }
+    }
 
         // CONFIRMADO PARA BORRAR
         public async Task<IActionResult> OnPostBorrar()
