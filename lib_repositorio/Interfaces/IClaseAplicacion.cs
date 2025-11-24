@@ -6,6 +6,7 @@ namespace lib_repositorio.Interfaces
     {
         void Configurar(string StringConexion);
         List<Clase> PorNombre(Clase? entidad);
+        List<Clase> ListarPorFecha(DateTime fecha);
         List<Clase> Listar();
         Clase? Guardar(Clase? entidad);
         Clase? Modificar(Clase? entidad);

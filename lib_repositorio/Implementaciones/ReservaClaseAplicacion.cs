@@ -85,5 +85,35 @@ namespace lib_repositorio.Implementaciones
 
             return query.Take(50).ToList();
         }
+        public ReservaClase? Reservar(int usuarioId, int claseId, DateTime fechaReserva)
+        {
+            // Validar cupos disponibles
+            var clase = this.IConexion!.Clase!.FirstOrDefault(c => c.Id == claseId);
+            if (clase == null)
+                throw new Exception("Clase no encontrada");
+
+            if (clase.Cupos <= 0)
+                return null; // ❌ No hay cupos
+
+            // Crear reserva
+            var reserva = new ReservaClase
+            {
+                UsuarioId = usuarioId,
+                ClaseId = claseId,
+                FechaReserva = fechaReserva,
+                Estado = "Confirmada"
+            };
+
+            this.IConexion!.ReservaClase!.Add(reserva);
+
+            // Reducir cupos de la clase
+            clase.Cupos -= 1;
+            var entry = this.IConexion.Entry<Clase>(clase);
+            entry.State = EntityState.Modified;
+
+            this.IConexion.SaveChanges();
+
+            return reserva;
+        }
     }
 }

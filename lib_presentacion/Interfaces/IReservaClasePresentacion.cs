@@ -8,5 +8,7 @@ namespace lib_presentacion.Interfaces
         Task<ReservaClase?> Guardar(ReservaClase? entidad);
         Task<ReservaClase?> Modificar(ReservaClase? entidad);
         Task<ReservaClase?> Borrar(ReservaClase? entidad);
+        Task<ReservaClase?> Reservar(int usuarioId, int claseId, DateTime fechaReserva);
     }
+
 }

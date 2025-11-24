@@ -67,7 +67,6 @@ namespace lib_repositorio.Implementaciones
 
             var query = this.IConexion!.Clase!.AsQueryable();
 
-            // Filtros dinámicos según los campos de Clase
             if (entidad.Id != 0)
                 query = query.Where(x => x.Id == entidad.Id);
 
@@ -86,6 +85,12 @@ namespace lib_repositorio.Implementaciones
             if (entidad.HorarioId != 0)
                 query = query.Where(x => x.HorarioId == entidad.HorarioId);
 
+            return query.Take(50).ToList();
+        }
+
+        public List<Clase> ListarPorFecha(DateTime fecha)
+        {
+            var query = this.IConexion!.Clase!.AsQueryable();
             return query.Take(50).ToList();
         }
     }

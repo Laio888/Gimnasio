@@ -8,5 +8,7 @@ namespace lib_presentacion.Interfaces
         Task<Clase?> Guardar(Clase? entidad);
         Task<Clase?> Modificar(Clase? entidad);
         Task<Clase?> Borrar(Clase? entidad);
+        Task<List<Clase>> ListarPorFecha(DateTime fecha);
+
     }
 }

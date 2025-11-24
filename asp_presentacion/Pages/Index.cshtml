@@ -1,10 +1,22 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container-fluid mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-4">Bienvenido al Portal de Gimnasio</h1>
+            <p class="lead mb-5">
+                Gestiona tus clases, rutinas y configuración de usuario desde un solo lugar.
+            </p>
+
+            <!-- Botones principales -->
+            <div class="d-flex justify-content-center gap-3">
+                <a class="btn btn-success btn-lg" asp-page="/Ventanas/Login">Ingresar</a>
+                <a class="btn btn-info btn-lg" asp-page="/Ventanas/Registrar">Registrarse</a>
+            </div>
+        </div>
+    </div>
 </div>

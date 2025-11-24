@@ -6,6 +6,7 @@ namespace lib_repositorio.Interfaces
     {
         void Configurar(string StringConexion);
         List<ReservaClase> PorNombre(ReservaClase? entidad);
+        ReservaClase? Reservar(int usuarioId, int claseId, DateTime fechaReserva);
         List<ReservaClase> Listar();
         ReservaClase? Guardar(ReservaClase? entidad);
         ReservaClase? Modificar(ReservaClase? entidad);

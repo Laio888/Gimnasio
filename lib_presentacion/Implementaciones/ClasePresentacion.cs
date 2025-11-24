@@ -81,5 +81,26 @@ namespace lib_presentacion.Implementaciones
                 JsonConversor.ConvertirAString(respuesta["Entidad"]));
             return entidad;
         }
+
+        // 🔎 Nuevo método: Listar clases por fecha
+        public async Task<List<Clase>> ListarPorFecha(DateTime fecha)
+        {
+            var lista = new List<Clase>();
+            var datos = new Dictionary<string, object>
+            {
+                ["Fecha"] = fecha.ToString("yyyy-MM-dd")
+            };
+
+            comunicaciones = new Comunicaciones();
+            datos = comunicaciones.ConstruirUrl(datos, "Clase/ListarPorFecha");
+            var respuesta = await comunicaciones!.Ejecutar(datos);
+
+            if (respuesta.ContainsKey("Error"))
+                throw new Exception(respuesta["Error"]!.ToString()!);
+
+            lista = JsonConversor.ConvertirAObjeto<List<Clase>>(
+                JsonConversor.ConvertirAString(respuesta["Entidades"]));
+            return lista;
+        }
     }
 }

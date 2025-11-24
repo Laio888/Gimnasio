@@ -45,11 +45,11 @@ namespace asp_presentacion.Pages.Ventanas
                 // Llamada al servicio de login
                 var usuario = await iPresentacion.Login(Correo, PasswordHash);
                 Console.WriteLine($"[LOGIN] Servicio retornó: {(usuario != null ? usuario.Correo : "null")}");
-
                 if (usuario != null)
                 {
                     // Guardar datos en sesión
                     HttpContext.Session.SetString("Usuario", usuario.Correo);
+                    HttpContext.Session.SetInt32("UsuarioId", usuario.Id);
                     HttpContext.Session.SetString("Nombre", usuario.Nombre ?? "");
                     HttpContext.Session.SetString("RolId", usuario.RolId.ToString());
 
