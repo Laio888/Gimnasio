@@ -1,6 +1,7 @@
 ﻿@model string
 
 @{
+    // Tipo de mensaje (success, error, warning, info)
     var tipo = ViewData["TipoMensaje"]?.ToString() ?? "info";
 
     var clase = tipo switch

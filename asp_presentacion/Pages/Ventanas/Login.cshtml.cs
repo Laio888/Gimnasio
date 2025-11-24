@@ -34,6 +34,7 @@ namespace asp_presentacion.Pages.Ventanas
 
                 Console.WriteLine($"[LOGIN] Handler ejecutado Correo={Correo}");
 
+                // Validación básica antes de llamar al servicio
                 if (string.IsNullOrWhiteSpace(Correo?.Trim()) || string.IsNullOrWhiteSpace(PasswordHash?.Trim()))
                 {
                     ViewData["Mensaje"] = "Debe ingresar correo y contraseña.";
@@ -41,19 +42,23 @@ namespace asp_presentacion.Pages.Ventanas
                     return Page();
                 }
 
+                // Llamada al servicio de login
                 var usuario = await iPresentacion.Login(Correo, PasswordHash);
                 Console.WriteLine($"[LOGIN] Servicio retornó: {(usuario != null ? usuario.Correo : "null")}");
 
                 if (usuario != null)
                 {
+                    // Guardar datos en sesión
                     HttpContext.Session.SetString("Usuario", usuario.Correo);
                     HttpContext.Session.SetString("Nombre", usuario.Nombre ?? "");
                     HttpContext.Session.SetString("RolId", usuario.RolId.ToString());
 
                     Console.WriteLine($"[LOGIN OK] Sesión guardada Usuario={usuario.Correo}");
 
+                    // 🔑 Limpia cualquier mensaje previo
                     ViewData.Clear();
 
+                    // ✅ Redirige al portal principal del usuario (dashboard)
                     return RedirectToPage("/Ventanas/UsuarioPrincipal");
                 }
                 else
@@ -68,6 +73,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 Console.WriteLine($"[LOGIN ERROR] {ex.Message}");
 
+                // Manejo de excepciones personalizadas
                 if (ex.Message == "lbFaltaInformacion")
                 {
                     ViewData["Mensaje"] = "Falta información: ingrese todos los campos.";

@@ -57,7 +57,6 @@ namespace asp_presentacion.Pages.Ventanas
                     ViewData.Clear();
 
                     // Redirige al portal principal del usuario (dashboard)
-                    return RedirectToPage("/Ventanas/UsuarioPrincipal");
                 }
                 else
                 {

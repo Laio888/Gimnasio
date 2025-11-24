@@ -2,48 +2,26 @@
 @model asp_presentacion.Pages.Ventanas.UsuarioPrincipalModel
 @{
     ViewData["Title"] = "Portal del Usuario";
-    string nombre = HttpContext.Session.GetString("Nombre") ?? "Usuario";
 }
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container-fluid">
+        <!-- Logo / Marca -->
+        <a class="navbar-brand" asp-page="Index">🏋️ GimnasioApp</a>
 
-        <!-- Logo -->
-        <a class="navbar-brand fw-bold d-flex align-items-center" asp-page="Index">
-            🏋️ GimnasioApp
-        </a>
-
-        <!-- Responsive toggle -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#usuarioNavbar"
                 aria-controls="usuarioNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Contenido -->
         <div class="collapse navbar-collapse" id="usuarioNavbar">
+                </li>
+                </li>
+            </ul>
 
-            <!-- Usuario + menú desplegable -->
+            <!-- Botón engranaje (ConfigUsuario) -->
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="usuarioMenu"
-                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="me-2">👤</span> @nombre
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="usuarioMenu">
-                        <li>
-                            <a class="dropdown-item" asp-page="/Ventanas/ConfigUsuario">⚙ Configuración</a>
-                        </li>
-
-                        <li><hr class="dropdown-divider" /></li>
-
-                        <li>
-                            <form method="post" asp-page="/Ventanas/Login" asp-page-handler="Logout">
-                                <button class="dropdown-item text-danger">🔓 Cerrar sesión</button>
-                            </form>
-                        </li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Ventanas/ConfigUsuario">⚙</a>
                 </li>
             </ul>
 
@@ -51,57 +29,13 @@
     </div>
 </nav>
 
-<!-- CONTENIDO PRINCIPAL -->
 <div class="container mt-5">
-
-    <h2 class="text-center mb-3">Bienvenido, @nombre 👋</h2>
-    <p class="text-center text-muted">Tu espacio personal dentro del sistema del gimnasio</p>
-
     <hr />
 
-    <!-- ACCIONES RÁPIDAS (Diseño profesional) -->
-    <div class="row mt-4 g-4">
-
-        <div class="col-md-4">
-            <a class="text-decoration-none" asp-page="Ventanas/ReservarClase">
-                <div class="card shadow-sm action-card h-100">
-                    <div class="card-body text-center">
-                        <div class="display-4 mb-3">📅</div>
-                        <h5 class="card-title">Reservar Clase</h5>
-                        <p class="card-text text-muted">
-                            Consulta horarios y reserva tu cupo fácilmente.
-                        </p>
-                    </div>
-                </div>
-            </a>
         </div>
-
-        <div class="col-md-4">
-            <a class="text-decoration-none" asp-page="Ventanas/CrearRutina">
-                <div class="card shadow-sm action-card h-100">
-                    <div class="card-body text-center">
-                        <div class="display-4 mb-3">🏋️</div>
-                        <h5 class="card-title">Crear Rutina</h5>
-                        <p class="card-text text-muted">
-                            Construye tu rutina personalizada con ejercicios.
-                        </p>
-                    </div>
-                </div>
-            </a>
+        <div class="col-md-4 mb-3">
+            <a class="btn btn-success w-100" asp-page="Ventanas/CrearRutina">🏋️ Crear Rutina</a>
         </div>
-
-        <div class="col-md-4">
-            <a class="text-decoration-none" asp-page="Ventanas/Notificacion">
-                <div class="card shadow-sm action-card h-100">
-                    <div class="card-body text-center">
-                        <div class="display-4 mb-3">🔔</div>
-                        <h5 class="card-title">Notificaciones</h5>
-                        <p class="card-text text-muted">
-                            Mantente al día con recordatorios e información.
-                        </p>
-                    </div>
-                </div>
-            </a>
         </div>
 
     </div>

@@ -27,10 +27,12 @@ namespace asp_presentacion.Pages.Ventanas
             if (correoSesion == null)
                 return RedirectToPage("/Ventanas/Login");
 
+            // Buscar usuario por correo
             var entidad = new Usuario { Correo = correoSesion };
             var lista = await _usuarioService.PorNombre(entidad);
             Usuario = lista.FirstOrDefault();
 
+            // Precargar datos para mostrar/editar
             if (Usuario != null)
             {
                 Nombre = Usuario.Nombre ?? "";
@@ -40,6 +42,7 @@ namespace asp_presentacion.Pages.Ventanas
             return Page();
         }
 
+        // Abrir ventana de modificar (si la tienes aparte)
         public IActionResult OnPostModificar()
         {
             return RedirectToPage("/Ventanas/ModificarUsuario");
@@ -58,6 +61,7 @@ namespace asp_presentacion.Pages.Ventanas
             if (usuario == null)
                 return RedirectToPage("/Ventanas/Login");
 
+            // Validación de cambio de contraseña
             if (!string.IsNullOrEmpty(PasswordNueva))
             {
                 if (usuario.PasswordHash != PasswordActual)
@@ -70,11 +74,14 @@ namespace asp_presentacion.Pages.Ventanas
                 usuario.PasswordHash = PasswordNueva;
             }
 
+            // Actualiza nombre y correo
             usuario.Nombre = Nombre;
             usuario.Correo = Correo;
 
+            // Guardar cambios
             await _usuarioService.Modificar(usuario);
 
+            // Actualizar sesión
             HttpContext.Session.SetString("Usuario", usuario.Correo);
             HttpContext.Session.SetString("Nombre", usuario.Nombre);
 
@@ -84,6 +91,7 @@ namespace asp_presentacion.Pages.Ventanas
             return RedirectToPage("/Ventanas/ConfigUsuario");
         }
 
+        // CONFIRMADO PARA BORRAR
         public async Task<IActionResult> OnPostBorrar()
         {
             var correoSesion = HttpContext.Session.GetString("Usuario");

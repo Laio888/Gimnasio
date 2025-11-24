@@ -7,17 +7,20 @@
 <div class="container-fluid mt-4">
     <div class="row">
 
+        <!-- Panel lateral -->
         <div class="col-md-3 bg-dark text-light p-3" style="min-height: 100vh;">
             <h4 class="mb-4">⚙ Ajustes</h4>
 
             <ul class="nav flex-column">
 
+                <!-- Modificar perfil -->
                 <li class="nav-item mb-2">
                     <form method="post" asp-page-handler="Modificar">
                         <button class="btn btn-outline-light w-100 text-start">Modificar Perfil</button>
                     </form>
                 </li>
 
+                <!-- Borrar cuenta (abre modal) -->
                 <li class="nav-item mb-2">
                     <button type="button"
                             class="btn btn-outline-danger w-100 text-start"
@@ -26,6 +29,7 @@
                     </button>
                 </li>
 
+                <!-- Volver -->
                 <li class="nav-item mt-4">
                     <a class="btn btn-secondary w-100 text-start"
                        asp-page="/Ventanas/UsuarioPrincipal">
@@ -36,6 +40,7 @@
             </ul>
         </div>
 
+        <!-- Panel principal -->
         <div class="col-md-9 p-4">
             <h3>Información Personal</h3>
             <hr />
@@ -60,6 +65,7 @@
 </div>
 
 
+<!-- MODAL DE CONFIRMACIÓN PARA BORRAR -->
 <div class="modal fade" id="modalBorrar" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
