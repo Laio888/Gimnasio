@@ -158,18 +158,9 @@ namespace lib_presentacion.Implementaciones
             var respuesta = await comunicaciones!.Ejecutar(datos);
 
             if (respuesta.ContainsKey("Error"))
-                throw new Exception(respuesta["Error"]!.ToString());
 
-            // ✔ El backend devuelve "Usuario", NO "Entidad"
-            if (!respuesta.ContainsKey("Usuario"))
-                throw new Exception("El servidor no devolvió un usuario válido.");
-
-            var usuarioJson = JsonConversor.ConvertirAString(respuesta["Usuario"]);
-            var usuario = JsonConversor.ConvertirAObjeto<Usuario>(usuarioJson);
-
-            return usuario;
         }
-
+        
 
     }
 }
