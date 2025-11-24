@@ -2,7 +2,6 @@
 using lib_presentacion.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using asp_presentacion.Pages.Shared;
 
 namespace asp_presentacion.Pages.Ventanas
 {
@@ -28,8 +27,10 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
-                // Validación básica antes de registrar
-                if (string.IsNullOrWhiteSpace(Nombre) || string.IsNullOrWhiteSpace(Correo) || string.IsNullOrWhiteSpace(PasswordHash))
+                // Validación básica
+                if (string.IsNullOrWhiteSpace(Nombre) ||
+                    string.IsNullOrWhiteSpace(Correo) ||
+                    string.IsNullOrWhiteSpace(PasswordHash))
                 {
                     ViewData["Mensaje"] = "Debe ingresar todos los campos.";
                     ViewData["TipoMensaje"] = "warning";
@@ -40,23 +41,23 @@ namespace asp_presentacion.Pages.Ventanas
                 {
                     Nombre = Nombre,
                     Correo = Correo,
-                    PasswordHash = PasswordHash, // ⚠️ Texto plano en este proyecto académico
-                    RolId = 1 // Usuario por defecto
+                    PasswordHash = PasswordHash, // Plano en este proyecto
+                    RolId = 1
                 };
 
                 var usuario = await iPresentacion.Registrar(nuevoUsuario);
 
                 if (usuario != null)
                 {
-                    // Iniciar sesión automáticamente tras registrar
+                    // Guardar sesión
                     HttpContext.Session.SetString("Usuario", usuario.Correo);
                     HttpContext.Session.SetString("Nombre", usuario.Nombre ?? "");
                     HttpContext.Session.SetString("RolId", usuario.RolId.ToString());
 
-                    // 🔑 Limpia cualquier mensaje previo
                     ViewData.Clear();
 
-                    // Redirige al portal principal del usuario (dashboard)
+                    // 🔥 ESTA ERA LA PARTE QUE FALTABA 🔥
+                    return RedirectToPage("/Ventanas/UsuarioPrincipal");
                 }
                 else
                 {

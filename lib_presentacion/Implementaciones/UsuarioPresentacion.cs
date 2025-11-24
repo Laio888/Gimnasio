@@ -147,20 +147,41 @@ namespace lib_presentacion.Implementaciones
 
         public async Task<Usuario?> Registrar(Usuario? entidad)
         {
-            if (entidad == null)
-                throw new Exception("lbFaltaInformacion");
+            try
+            {
+                if (entidad == null)
+                    throw new Exception("lbFaltaInformacion");
 
-            var datos = new Dictionary<string, object>();
-            datos["Entidad"] = entidad;
+                var datos = new Dictionary<string, object>();
+                datos["Entidad"] = entidad;
 
-            comunicaciones = new Comunicaciones();
-            datos = comunicaciones.ConstruirUrl(datos, "Usuario/Registrar");
-            var respuesta = await comunicaciones!.Ejecutar(datos);
+                comunicaciones = new Comunicaciones();
+                datos = comunicaciones.ConstruirUrl(datos, "Usuario/Registrar");
 
-            if (respuesta.ContainsKey("Error"))
+                var respuesta = await comunicaciones!.Ejecutar(datos);
 
+                if (respuesta == null)
+                    throw new Exception("Error: no hubo respuesta del servidor.");
+
+                if (respuesta.ContainsKey("Error"))
+                    throw new Exception(respuesta["Error"]?.ToString() ?? "Error desconocido");
+
+                if (!respuesta.ContainsKey("Usuario"))
+                    throw new Exception("El servidor no devolvió un usuario válido.");
+
+                var jsonUsuario = JsonConversor.ConvertirAString(respuesta["Usuario"]);
+                var usuario = JsonConversor.ConvertirAObjeto<Usuario>(jsonUsuario);
+
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[REGISTRAR PRESENTACION ERROR] {ex.Message}");
+                throw;
+            }
         }
-        
+
+
 
     }
 }
