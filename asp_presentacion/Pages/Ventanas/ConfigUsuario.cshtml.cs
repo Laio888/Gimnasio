@@ -9,10 +9,8 @@ namespace asp_presentacion.Pages.Ventanas
     {
         private readonly IUsuarioPresentacion _usuarioService;
 
-        public ConfigUsuarioModel(IUsuarioPresentacion usuarioService)
-        {
-            _usuarioService = usuarioService;
-        }
+            {
+            }
 
         public Usuario? Usuario { get; set; }
 
