@@ -1,40 +1,28 @@
-using lib_dominio.Entidades;
-using lib_dominio.Nucleo;
-using lib_presentacion.Interfaces;
-using Microsoft.AspNetCore.Mvc;
+ï»¿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using asp_presentacion.Pages.Shared;
 
 namespace asp_presentacion.Pages.Ventanas
 {
     public class UsuarioPrincipalModel : PageModel
     {
-        public string? UsuarioCorreo { get; set; }
+        public string NombreUsuario { get; set; } = string.Empty;
 
         public IActionResult OnGet()
         {
-            // Verificar si hay sesión activa
-            UsuarioCorreo = HttpContext.Session.GetString("Usuario");
+            // Si no hay sesiÃ³n â†’ redirigir al login
+            var nombre = HttpContext.Session.GetString("Nombre");
 
-            if (string.IsNullOrEmpty(UsuarioCorreo))
-            {
-                // Si no hay sesión, redirigir al Login
+            if (string.IsNullOrEmpty(nombre))
                 return RedirectToPage("/Ventanas/Login");
-            }
 
+            NombreUsuario = nombre;
             return Page();
         }
 
+        // Handler para cerrar sesiÃ³n desde el dropdown
         public IActionResult OnPostLogout()
         {
-            // Cerrar sesión
             HttpContext.Session.Clear();
-
-            // Mensaje de feedback
-            TempData["Mensaje"] = "Sesión cerrada correctamente";
-            TempData["TipoMensaje"] = "info";
-
-            // Redirigir al Login
             return RedirectToPage("/Ventanas/Login");
         }
     }
